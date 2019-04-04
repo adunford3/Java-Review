@@ -1,18 +1,72 @@
 package com.Dunford;
 
+import java.awt.*;
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
+    	fizzBuzz();
+		System.out.println();
+    	System.out.println("Fibonacci(10): "+ fibonacci(10));
+    	int[] sortThis = {10, 3, 6, 7, 2, 1, 0};
+		insertionSort(sortThis);
+    	System.out.println(Arrays.toString(sortThis));
+//    	System.out.println("IsPrime(55): " + isPrime(55));
+//    	System.out.println("IsPrime(107): " + isPrime(107));
     }
 
+    public static void insertionSort(int[] arr) {
+    	int key;
+    	for (int i = 0; i < arr.length; i++) {
+    		key = arr[i];
+    		int j = i - 1;
+    		while (j >=0 && key < arr[j]) {
+    			arr[j + 1] = arr[j];
+    			j--;
+			}
+			arr[j + 1] = key;
+		}
+	}
+
+    // Fizz buzz from 1 to 100
+	// Write a program that prints the numbers from 1 to 100 and
+	// for multiples of '3' print "Fizz" instead of the number and
+	// for the multiples of '5' print "Buzz"
+	public static void fizzBuzz() {
+    	for (int i = 1; i < 101; i++) {
+    		if (i % 3 == 0) {
+    			System.out.print("Fizz");
+			} else if (i % 5 == 0) {
+    			System.out.print("Buzz");
+			} else {
+				System.out.print(i + "");
+			}
+			if (i != 100) {
+    			System.out.print(", ");
+			}
+		}
+	}
+
     // print fibonacci sequence: 1, 1, 2, 3, 5, 8, 13, etc.
-    public static void fibonacci() {
-    	// requires recursion
+    private static int fibonacci(int num) {
+		if (num < 2) {
+			return num;
+		}
+
+		// Recursion not as efficient as iterative, unoptimized for large numbers
+		return fibonacci(num - 1) + fibonacci(num - 2);
 	}
 
 	// print if a number is prime or not
-	public static void isPrime(int num) {
+	public static boolean isPrime(int num) {
     	// iterate through numbers up to square root + 1 of num
+		for (int i = 0; i < Math.sqrt(num) + 1; i++) {
+			if ((num % i) == 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	// print if string is a palindrome or not
@@ -20,11 +74,64 @@ public class Main {
     	// without library methods
 	}
 
-	// Reverse a string
+	// Reverse a string w String Buffer
+	public static void reverseStringWStringBuffer(String string) {
+    	StringBuffer sBuffer = new StringBuffer(string);
+    	System.out.println(sBuffer.reverse());
+	}
 
+	// Reverse string iteratively
+	public static void reverseStringIterative(String string) {
+    	char[] strArray = string.toCharArray();
+    	for (int i = strArray.length - 1; i >= 0; i--) {
+    		System.out.println(strArray[i]);
+		}
+	}
+
+	// Reverse string recursively
+	public static String reverseStringRecursive(String string) {
+    	if (string == null || string.length() <= 1) {
+    		return string;
+		} else {
+    		return reverseStringRecursive(string.substring(1)) + string.charAt(0);
+		}
+	}
 
 	// Create a pyramid of numbers
+	public static void numberPyramid(int numRows) {
+    	int rowCount = 1;
+    	for (int i = numRows; i > 0; i--) {
+    		for (int j = 1; j <= i; j++) {
+    			System.out.print(" ");
+			}
+			for (int n = 1; n <= rowCount; n++) {
+    			System.out.print(rowCount + " ");
+			}
+			System.out.println();
 
+    		rowCount++;
+		}
+	}
+
+	//Create Pyramid special pattern
+	public static void specialPyramid(int numRows) {
+    	int rowCount = 1;
+
+    	for (int i = numRows; i > 0; i--) {
+    		for (int j = 1; j <= i * 2; j++) {
+    			System.out.print(" ");
+			}
+			for (int n = 1; n <= rowCount; n++) {
+    			System.out.print(n + " ");
+			}
+			for (int m = rowCount - 1; m >= 1; m--) {
+				System.out.print(m + " ");
+			}
+			System.out.println();
+
+    		rowCount++;
+		}
+	}
 
 	// Remove all white space from a string
 
